@@ -1,0 +1,37 @@
+# ============================================================
+# Configuration du dataset - Détection de fumée (Smoke Detection)
+# Format YOLO (Ultralytics)
+# ============================================================
+# Arborescence attendue :
+# data/
+#   images/
+#     train/
+#     val/
+#     test/
+#   labels/
+#     train/
+#     val/
+#     test/
+#
+# Chaque image .jpg/.png doit avoir un fichier .txt du même nom
+# contenant les annotations au format YOLO :
+#   class_id  x_center  y_center  width  height   (valeurs normalisées 0-1)
+#
+# Datasets publics utilisables pour démarrer :
+#   - D-Fire (Fire and Smoke Dataset) : https://github.com/gaiasd/DFireDataset
+#   - Wildfire Smoke Dataset (Roboflow Universe)
+#   - AI for Mankind Wildfire Smoke Dataset
+# ------------------------------------------------------------
+
+path: ../data          # racine du dataset (relatif à ce fichier)
+train: images/train
+val: images/val
+test: images/test
+
+# Nombre de classes
+nc: 2
+
+# Noms des classes
+names:
+  0: smoke
+  1: fire

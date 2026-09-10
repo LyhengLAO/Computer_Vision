@@ -1,0 +1,80 @@
+# ============================================================
+# .gitignore — Smoke Detection YOLO
+# ============================================================
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ---- Environnements virtuels ----
+venv/
+env/
+ENV/
+.venv/
+.env
+
+# ---- Jupyter / Notebooks ----
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# ---- Dataset (volumineux, à ne jamais committer) ----
+data/images/
+data/labels/
+data/_raw_kaggle/
+data/*.cache
+*.cache
+
+# ---- Poids de modèles (volumineux, à héberger ailleurs : Git LFS, Releases, Drive...) ----
+models/*.pt
+models/*.onnx
+models/*.engine
+models/*.torchscript
+!models/.gitkeep
+
+# ---- Résultats d'entraînement / évaluation / inférence ----
+runs/
+outputs/*
+!outputs/.gitkeep
+
+# ---- Fichiers uploadés temporairement par l'app Streamlit ----
+outputs/upload_*
+outputs/pred_*
+
+# ---- Kaggle / credentials ----
+kaggle.json
+.kaggle/
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Éditeurs / IDE ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- Streamlit ----
+.streamlit/secrets.toml
+
+# ---- Logs ----
+*.log

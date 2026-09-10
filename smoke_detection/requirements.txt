@@ -1,0 +1,21 @@
+ultralytics>=8.2.0
+opencv-python>=4.9.0
+numpy>=1.26.0
+pandas>=2.2.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+streamlit>=1.35.0
+streamlit-webrtc>=0.47.0
+av>=12.0.0
+Pillow>=10.3.0
+pyyaml>=6.0.1
+torch>=2.2.0
+torchvision>=0.17.0
+kagglehub>=0.3.0
+
+# Pour le notebook d'exploration (optionnel)
+jupyter>=1.0.0
+nbformat>=5.10.0
+
+# Pour compléter le dataset avec Roboflow (optionnel, voir notebooks/00_dataset_download.ipynb)
+roboflow>=1.1.0
