@@ -1,0 +1,41 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# ---- Résultats / CSV générés / vidéos annotées ----
+outputs/*
+!outputs/.gitkeep
+
+# ---- Vidéos uploadées temporairement (app Streamlit) ----
+outputs/upload_*.mp4
+outputs/counted_*.mp4
+
+# ---- Vidéos de test (volumineuses, à ne pas committer) ----
+data/sample_videos/*
+!data/sample_videos/.gitkeep
+
+# ---- Poids YOLO téléchargés/exportés ----
+*.pt
+*.onnx
+models/*.pt
+models/*.onnx
+!models/.gitkeep
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+
+# ---- OS / éditeurs ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---- Streamlit ----
+.streamlit/secrets.toml
+
+# ---- Logs ----
+*.log
