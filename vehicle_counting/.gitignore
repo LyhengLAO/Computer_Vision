@@ -9,6 +9,7 @@ env/
 # ---- Résultats / CSV générés / vidéos annotées ----
 outputs/*
 !outputs/.gitkeep
+configs/*.yaml
 
 # ---- Vidéos uploadées temporairement (app Streamlit) ----
 outputs/upload_*.mp4
