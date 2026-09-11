@@ -123,7 +123,7 @@ def main():
     config = run_interactive_setup(frame)
 
     if config is None:
-        print("❌ Configuration annulée.")
+        print(" Configuration annulée.")
         return
 
     out_path = Path(args.out)
