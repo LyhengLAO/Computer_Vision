@@ -87,7 +87,7 @@ weights_input = st.sidebar.text_input("Poids du modèle", value=DEFAULT_WEIGHTS,
 conf_threshold = st.sidebar.slider("Seuil de confiance", 0.1, 0.9, 0.4, 0.05)
 tracker_choice = st.sidebar.selectbox("Tracker", ["bytetrack.yaml", "botsort.yaml"])
 
-mode = st.sidebar.radio("Mode d'entrée", ["📤 Upload vidéo", "🌐 Caméra IP / RTSP / USB en direct"])
+mode = st.sidebar.radio("Mode d'entrée", [" Upload vidéo", " Caméra IP / RTSP / USB en direct"])
 
 st.title("🚗 Comptage de véhicules IN/OUT — YOLO + tracking")
 st.caption(
