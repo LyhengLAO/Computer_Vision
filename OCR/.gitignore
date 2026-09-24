@@ -1,0 +1,32 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# ---- Documents de test (peuvent contenir des données sensibles, ne pas committer) ----
+data/sample_documents/*
+!data/sample_documents/.gitkeep
+
+# ---- Résultats générés ----
+outputs/*
+!outputs/.gitkeep
+
+# ---- Modèles EasyOCR téléchargés localement (cache, pas du code) ----
+models/*.pth
+!models/.gitkeep
+
+# ---- OS / éditeurs ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---- Streamlit ----
+.streamlit/secrets.toml
+
+# ---- Logs ----
+*.log
