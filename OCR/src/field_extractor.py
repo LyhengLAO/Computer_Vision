@@ -31,7 +31,7 @@ INVOICE_NUMBER_PATTERNS = [
 
 TOTAL_KEYWORDS = ["total ttc", "montant total", "total à payer", "net à payer", "total"]
 TVA_KEYWORDS = ["tva", "vat", "tax"]
-AMOUNT_PATTERN = r"(\d{1,3}(?:[ .]\d{3})*(?:[.,]\d{2})?)\s*(?:€|eur)?"
+AMOUNT_PATTERN = r"\$?\s*(\d{1,5}(?:[ .]\d{3})*(?:[.,]\d{2})?)\s*(?:€|eur|\$)?"
 
 
 def _normalize_text_blocks(ocr_results):
@@ -48,6 +48,32 @@ def _normalize_text_blocks(ocr_results):
             "bbox": item["bbox"],
         })
     return sorted(blocks, key=lambda b: (b["y"] // 15, b["x"]))  # regroupe approx. par ligne
+
+def find_exact_keyword(text, keywords):
+    """Retourne le premier mot-clé de `keywords` trouvé comme mot/expression exacte
+    dans `text` (insensible à la casse), ou None si aucun ne correspond.
+    Évite les faux positifs du type 'total' matchant dans 'subtotal'."""
+    text_lower = text.lower()
+    for kw in keywords:
+        pattern = r"(?<!\w)" + re.escape(kw) + r"(?!\w)"
+        if re.search(pattern, text_lower):
+            return kw
+    return None
+
+def _find_amount_near_exact_keyword(blocks, keywords):
+    """Cherche un montant sur la même ligne (ou la ligne suivante) qu'un mot-clé
+    (ex: 'total ttc'), stratégie courante pour les factures/tickets.
+    Exclut les nombres immédiatement suivis de '%' (ex: 'TVA 20%'), qui sont un
+    taux et non un montant en euros."""
+    for i, block in enumerate(blocks):
+        if find_exact_keyword(block["text"], keywords) is not None:
+            for candidate in blocks[i:i + 3]:
+                for match in re.finditer(AMOUNT_PATTERN, candidate["text"]):
+                    following = candidate["text"][match.end():match.end() + 2].strip()
+                    if following.startswith("%"):
+                        continue
+                    return match.group(1), candidate["text"]
+    return None, None
 
 
 def _find_amount_near_keyword(blocks, keywords):
@@ -90,7 +116,7 @@ def extract_fields(ocr_results: list) -> dict:
             break
 
     # --- Montant total ---
-    total_raw, total_source_text = _find_amount_near_keyword(blocks, TOTAL_KEYWORDS)
+    total_raw, total_source_text = _find_amount_near_exact_keyword(blocks, TOTAL_KEYWORDS) # total_raw, total_source_text = _find_amount_near_keyword(blocks, TOTAL_KEYWORDS) selon la recherche voulait exact ou bien inclut
 
     # --- TVA ---
     tva_raw, tva_source_text = _find_amount_near_keyword(blocks, TVA_KEYWORDS)
